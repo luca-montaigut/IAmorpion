@@ -1,0 +1,109 @@
+table {
+	border-collapse: collapse;
+}
+
+.carre {
+	width: 150px;
+	height: 150px;
+}
+
+#titre {
+	left: 0px;
+	top: 0px;
+	text-align: center;
+	width: 100%;
+	display: block;
+	font-family: 'Lobster', cursive;
+	font-size: 80px;
+	padding-top: 20px;
+	color: black;
+}
+
+#victoire {
+	text-align: center;
+	font-family: 'Lobster', cursive;
+	font-size: 50px;
+	padding-top: 15px;
+	color: black;
+}
+
+#A1 {
+	border-right: solid 10px black;
+	border-bottom: solid 10px black;
+}
+
+#A2 {
+	border-right: solid 10px black;
+	border-bottom: solid 10px black;
+	border-left: solid 10px black;
+	background-position: center; /* ligne à supprimer */
+}
+
+#A3 {
+	border-bottom: solid 10px black;
+	border-left: solid 10px black;
+	background-position: right; /* ligne à supprimer */
+}
+
+#B1 {
+	border-right: solid 10px black;
+	border-bottom: solid 10px black;
+	border-top: solid 10px black;
+}
+
+#B2 {
+	border: solid 10px black;
+
+}
+
+#B3 {
+	border-left: solid 10px black;
+	border-bottom: solid 10px black;
+	border-top: solid 10px black;
+}
+
+#C1 {
+	border-right: solid 10px black;
+	border-top: solid 10px black;
+}
+
+#C2 {
+	border-right: solid 10px black;
+	border-left: solid 10px black;
+	border-top: solid 10px black;
+
+}
+
+#C3 {
+	border-left: solid 10px black;
+	border-top: solid 10px black;
+}
+
+.jeu {
+	margin-top: 50px;
+	text-align: center;
+}
+
+#center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#rejouer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	text-align: center;
+	width: 100%;
+	display: block;
+}
+
+.bouton {
+	margin-bottom: 20px;
+	padding: 20px;
+	font-family: 'Lobster', cursive;
+	font-size: 80px;
+	background-color: #C3C2C2;
+	border-radius: 20px;
+	border: none;
+}

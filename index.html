@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Morpion</title>
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./style.css" type="text/css" />
+    </head>
+    <body>
+        <div id="titre">The Hacking Morpion</div>
+        <div id="victoire"></div>
+        <div class="jeu">
+            <table id="center">
+                <tbody>
+                    <tr>
+                        <td class="carre" id="A1" onclick="playerTurn(0, 0);"></td>
+                        <td class="carre" id="A2" onclick="playerTurn(1, 0);"></td>
+                        <td class="carre" id="A3" onclick="playerTurn(2, 0);"></td>
+                    </tr>
+                    <tr>
+                        <td class="carre" id="B1" onclick="playerTurn(0, 1);"></td>
+                        <td class="carre" id="B2" onclick="playerTurn(1, 1);"></td>
+                        <td class="carre" id="B3" onclick="playerTurn(2, 1);"></td>
+                    </tr>
+                    <tr>
+                        <td class="carre" id="C1" onclick="playerTurn(0, 2);"></td>
+                        <td class="carre" id="C2" onclick="playerTurn(1, 2);"></td>
+                        <td class="carre" id="C3" onclick="playerTurn(2, 2);"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="rejouer">
+            <button type="button" class="bouton" onclick="location.reload();">Rejouer</button>
+        </div>
+        <script src="./morpion.js"></script>
+    </body>
+</html>
