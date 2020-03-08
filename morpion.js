@@ -1,8 +1,4 @@
 ia = "J2";
-joueur = (ia == "J1") ? "J2" : "J1";
-if (ia == "J1") {
-	iaTurn();
-}
 map = [];
 for (i = 0; i < 3; i++) {
 	map[i] = [];
@@ -11,8 +7,7 @@ for (i = 0; i < 3; i++) {
 }
 finish = false;
 
-function getZone(x, y) {
-
+const getZone = (x, y) => {
 	if (y == 0)
 		return 'A' + (x + 1);
 	else if (y == 1)
@@ -21,7 +16,7 @@ function getZone(x, y) {
 		return 'C' + (x + 1);
 }
 
-function fillGrid(x, y, player) {
+const fillGrid = (x, y, player) => {
 	const image = (player == joueur) ? 'croix' : 'rond';
 	const zone = getZone(x, y);
 
@@ -34,7 +29,7 @@ function fillGrid(x, y, player) {
 	return true;
 }
 
-function playerTurn(x, y) {
+const playerTurn = (x, y) => {
 	if (finish)
 		return;
 	if (!fillGrid(x, y, joueur)) {
@@ -45,11 +40,12 @@ function playerTurn(x, y) {
 		iaTurn();
 };
 
-function iaTurn() {
+const iaTurn = () => {
 	x = 0;
 	y = 0;
 	while (!fillGrid(x, y, ia)) {
-		x++
+		console.log('test');
+		x++;
 		if (x >= 3) {
 			x = 0;
 			y++;
@@ -57,7 +53,7 @@ function iaTurn() {
 	}
 }
 
-function checking(player) {
+const checking = (player) => {
 	one = map[0][0];
 	two = map[0][1];
 	three = map[0][2];
@@ -82,4 +78,9 @@ function checking(player) {
 			document.getElementById('victoire').textContent = 'Tu as battu l\'IA !';
 		}
 	}
+}
+
+joueur = (ia == "J1") ? "J2" : "J1";
+if (ia == "J1") {
+	iaTurn();
 }
