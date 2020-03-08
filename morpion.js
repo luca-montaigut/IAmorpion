@@ -44,7 +44,6 @@ const iaTurn = () => {
 	x = 0;
 	y = 0;
 	while (!fillGrid(x, y, ia)) {
-		console.log('test');
 		x++;
 		if (x >= 3) {
 			x = 0;
