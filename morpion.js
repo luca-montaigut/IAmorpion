@@ -24,6 +24,16 @@ class Morpion {
 			return 'C' + (x + 1);
 	}
 
+	checkDraw = () => {
+		for (let x = 0; x < 3; x++) {
+			for (let y = 0; y < 3; y++) {
+				if (this.map[x][y] === "EMPTY")
+					return false;
+			}
+		}
+		return true;
+	}
+
 	fillGrid = (x, y, player) => {
 		const image = (player == this.player) ? 'croix' : 'rond';
 		const zone = this.getZone(x, y);
@@ -62,6 +72,10 @@ class Morpion {
 				document.getElementById('win').textContent = 'Tu as battu l\'IA !';
 			}
 		}
+		else if (this.checkDraw()) {
+			document.getElementById('win').textContent = "Vous êtes à égalité";
+			this.finish = true;
+		}
 	}
 
 	playerTurn = (x, y) => {
@@ -82,6 +96,8 @@ class Morpion {
 				x = 0;
 				y++;
 			}
+			if (y >= 3)
+				break;
 		}
 	}
 }
