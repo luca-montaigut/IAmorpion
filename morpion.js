@@ -129,11 +129,7 @@ class Morpion {
         J2: -1,
         ex: 0,
       };
-      console.log("winner");
-      console.log(result);
-      console.log("=== ENDGAME ===");
-      console.log(scores[result]);
-      console.log("================");
+
       return scores[result];
     }
 
@@ -143,9 +139,6 @@ class Morpion {
         for (let j = 0; j < 3; j++) {
           // Is the spot available?
           if (board[i][j] == "EMPTY") {
-            console.log("depth = ", depth);
-            console.log("IA turn");
-            console.log(i, j);
             board[i][j] = "J2";
             this.turn++;
             let score = this.minimax(board, depth + 1, false);
@@ -156,9 +149,7 @@ class Morpion {
           }
         }
       }
-      console.log("minimax remonte pour le player :");
-      console.log(bestScore);
-      alert("fuck");
+
       return bestScore;
     } else {
       let bestScore = Infinity;
@@ -166,9 +157,6 @@ class Morpion {
         for (let j = 0; j < 3; j++) {
           // Is the spot available?
           if (board[i][j] == "EMPTY") {
-            console.log("depth = ", depth);
-            console.log("Player turn");
-            console.log(i, j);
             board[i][j] = "J1";
             this.turn++;
             let score = this.minimax(board, depth + 1, true);
@@ -179,10 +167,7 @@ class Morpion {
           }
         }
       }
-      console.log("depth = ", depth);
-      console.log("minimax remonte pour l'ia' :");
-      console.log(bestScore);
-      alert("fuck");
+
       return bestScore;
     }
   }
@@ -195,17 +180,10 @@ class Morpion {
       for (let j = 0; j < 3; j++) {
         // Is the spot available?
         if (this.map[i][j] == "EMPTY") {
-          console.log("GO");
-          console.log("depth = ", depth);
-          console.log("IA turn");
-          console.log(i, j);
           this.map[i][j] = "J2";
           this.turn++;
           let score = this.minimax(this.map, depth + 1, false);
-          console.log("#################");
-          console.log("depth = ", depth);
-          console.log("score remonté :");
-          console.log(score);
+
           this.map[i][j] = "EMPTY";
           if (score > bestScore) {
             bestScore = score;
@@ -214,10 +192,7 @@ class Morpion {
         }
       }
     }
-    console.log("score final remonté :");
-    console.log(bestScore);
-    console.log("mouvement");
-    console.log(move);
+
     alert("fuck");
     this.fillGrid(move.i, move.j, this.ia);
   };
