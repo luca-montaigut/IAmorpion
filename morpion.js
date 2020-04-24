@@ -115,7 +115,7 @@ class Morpion {
     }
 
     if (winner == null && this.turn == 9) {
-      return "ex";
+      return "draw";
     } else {
       return winner;
     }
@@ -123,8 +123,8 @@ class Morpion {
 
   minimax(board, depth, isMaximizing) {
     let result = this.checkWinner();
-    if (result == this.ia) return 1;
-    else if (result == this.player) return -1;
+    if (result == this.ia) return 10 - depth;
+    else if (result == this.player) return -10 + depth;
     else if (result != null) return 0;
 
     if (isMaximizing) {
