@@ -123,23 +123,16 @@ class Morpion {
 
   minimax(board, depth, isMaximizing) {
     let result = this.checkWinner();
-    if (result !== null) {
-      let scores = {
-        J1: 1,
-        J2: -1,
-        ex: 0,
-      };
-
-      return scores[result];
-    }
+    if (result == this.ia) return 1;
+    else if (result == this.player) return -1;
+    else if (result != null) return 0;
 
     if (isMaximizing) {
       let bestScore = -Infinity;
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-          // Is the spot available?
           if (board[i][j] == "EMPTY") {
-            board[i][j] = "J2";
+            board[i][j] = this.ia;
             this.turn++;
             let score = this.minimax(board, depth + 1, false);
             board[i][j] = "EMPTY";
@@ -155,9 +148,8 @@ class Morpion {
       let bestScore = Infinity;
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-          // Is the spot available?
           if (board[i][j] == "EMPTY") {
-            board[i][j] = "J1";
+            board[i][j] = this.player;
             this.turn++;
             let score = this.minimax(board, depth + 1, true);
             board[i][j] = "EMPTY";
@@ -178,12 +170,10 @@ class Morpion {
     let move;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        // Is the spot available?
         if (this.map[i][j] == "EMPTY") {
-          this.map[i][j] = "J2";
+          this.map[i][j] = this.ia;
           this.turn++;
           let score = this.minimax(this.map, depth + 1, false);
-
           this.map[i][j] = "EMPTY";
           if (score > bestScore) {
             bestScore = score;
@@ -193,9 +183,8 @@ class Morpion {
       }
     }
 
-    alert("fuck");
     this.fillGrid(move.i, move.j, this.ia);
   };
 }
 
-const morpion = new Morpion("J1");
+const morpion = new Morpion("J2");
