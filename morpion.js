@@ -121,7 +121,7 @@ class Morpion {
     }
   }
 
-  minimax(board, isMaximizing) {
+  minimax(board, depth, isMaximizing) {
     let result = this.checkWinner();
     if (result !== null) {
       let scores = {
@@ -143,11 +143,12 @@ class Morpion {
         for (let j = 0; j < 3; j++) {
           // Is the spot available?
           if (board[i][j] == "EMPTY") {
+            console.log("depth = ", depth);
             console.log("IA turn");
             console.log(i, j);
             board[i][j] = "J2";
             this.turn++;
-            let score = this.minimax(board, false);
+            let score = this.minimax(board, depth + 1, false);
             board[i][j] = "EMPTY";
             if (score > bestScore) {
               bestScore = score;
@@ -165,11 +166,12 @@ class Morpion {
         for (let j = 0; j < 3; j++) {
           // Is the spot available?
           if (board[i][j] == "EMPTY") {
+            console.log("depth = ", depth);
             console.log("Player turn");
             console.log(i, j);
             board[i][j] = "J1";
             this.turn++;
-            let score = this.minimax(board, true);
+            let score = this.minimax(board, depth + 1, true);
             board[i][j] = "EMPTY";
             if (score < bestScore) {
               bestScore = score;
@@ -177,6 +179,7 @@ class Morpion {
           }
         }
       }
+      console.log("depth = ", depth);
       console.log("minimax remonte pour l'ia' :");
       console.log(bestScore);
       alert("fuck");
@@ -185,6 +188,7 @@ class Morpion {
   }
 
   iaTurn = () => {
+    let depth = 0;
     let bestScore = -Infinity;
     let move;
     for (let i = 0; i < 3; i++) {
@@ -192,12 +196,14 @@ class Morpion {
         // Is the spot available?
         if (this.map[i][j] == "EMPTY") {
           console.log("GO");
+          console.log("depth = ", depth);
           console.log("IA turn");
           console.log(i, j);
           this.map[i][j] = "J2";
           this.turn++;
-          let score = this.minimax(this.map, false);
+          let score = this.minimax(this.map, depth + 1, false);
           console.log("#################");
+          console.log("depth = ", depth);
           console.log("score remonté :");
           console.log(score);
           this.map[i][j] = "EMPTY";
