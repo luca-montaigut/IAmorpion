@@ -124,8 +124,8 @@ class Morpion {
   minimax(board, depth, isMaximizing) {
     let result = this.checkWinner();
     if (result == this.ia) return 10 - depth;
-    else if (result == this.player) return -10 + depth;
-    else if (result != null) return 0;
+    else if (result == this.player) return depth - 10;
+    else if (result != null) return depth;
 
     if (isMaximizing) {
       let bestScore = -Infinity;
@@ -136,6 +136,7 @@ class Morpion {
             this.turn++;
             let score = this.minimax(board, depth + 1, false);
             board[i][j] = "EMPTY";
+            this.turn--;
             if (score > bestScore) {
               bestScore = score;
             }
@@ -153,6 +154,7 @@ class Morpion {
             this.turn++;
             let score = this.minimax(board, depth + 1, true);
             board[i][j] = "EMPTY";
+            this.turn--;
             if (score < bestScore) {
               bestScore = score;
             }
@@ -175,6 +177,7 @@ class Morpion {
           this.turn++;
           let score = this.minimax(this.map, depth + 1, false);
           this.map[i][j] = "EMPTY";
+          this.turn--;
           if (score > bestScore) {
             bestScore = score;
             move = { i, j };
@@ -182,9 +185,25 @@ class Morpion {
         }
       }
     }
-
     this.fillGrid(move.i, move.j, this.ia);
   };
 }
 
-const morpion = new Morpion("J2");
+const whosFirst = () => {
+  let player;
+  while (!player == "1" || !player == "2") {
+    player = prompt(
+      "Taper 1 pour jouer en premier ou 2 pour laisser la main à l'IA?"
+    );
+    console.log(player, typeof player);
+  }
+  if ((player = "1")) {
+    player = "J1";
+  } else {
+    player = "J2";
+  }
+
+  return player;
+};
+
+const morpion = new Morpion(whosFirst());
