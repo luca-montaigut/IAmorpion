@@ -36,8 +36,6 @@ class Morpion {
     const zone = this.getZone(x, y);
 
     if (this.map[x][y] != "EMPTY") return false;
-    console.log("Player click");
-    console.log(x, y);
     this.map[x][y] = player;
     document.getElementById(
       zone
@@ -121,11 +119,12 @@ class Morpion {
     }
   }
 
-  minimax(board, depth, isMaximizing) {
+  minimax(board, depth, alpha, beta, isMaximizing) {
+    let move;
     let result = this.checkWinner();
     if (result == this.ia) return 10 - depth;
     else if (result == this.player) return depth - 10;
-    else if (result != null) return depth;
+    else if (result != null) return 0;
 
     if (isMaximizing) {
       let bestScore = -Infinity;
@@ -134,16 +133,23 @@ class Morpion {
           if (board[i][j] == "EMPTY") {
             board[i][j] = this.ia;
             this.turn++;
-            let score = this.minimax(board, depth + 1, false);
+            let score = this.minimax(board, depth + 1, alpha, beta, false);
             board[i][j] = "EMPTY";
             this.turn--;
             if (score > bestScore) {
               bestScore = score;
+              move = { i, j };
+            }
+            alpha = Math.max(alpha, score);
+            if (beta <= alpha) {
+              break;
             }
           }
         }
       }
-
+      if (depth === 0) {
+        return move;
+      }
       return bestScore;
     } else {
       let bestScore = Infinity;
@@ -152,39 +158,24 @@ class Morpion {
           if (board[i][j] == "EMPTY") {
             board[i][j] = this.player;
             this.turn++;
-            let score = this.minimax(board, depth + 1, true);
+            let score = this.minimax(board, depth + 1, alpha, beta, true);
             board[i][j] = "EMPTY";
             this.turn--;
-            if (score < bestScore) {
-              bestScore = score;
+            bestScore = Math.min(bestScore, score);
+            beta = Math.min(beta, score);
+            if (beta <= alpha) {
+              break;
             }
           }
         }
       }
-
       return bestScore;
     }
   }
 
   iaTurn = () => {
-    let depth = 0;
-    let bestScore = -Infinity;
-    let move;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (this.map[i][j] == "EMPTY") {
-          this.map[i][j] = this.ia;
-          this.turn++;
-          let score = this.minimax(this.map, depth + 1, false);
-          this.map[i][j] = "EMPTY";
-          this.turn--;
-          if (score > bestScore) {
-            bestScore = score;
-            move = { i, j };
-          }
-        }
-      }
-    }
+    let move = this.minimax(this.map, 0, -Infinity, Infinity, true);
+
     this.fillGrid(move.i, move.j, this.ia);
   };
 }
@@ -195,11 +186,10 @@ const whosFirst = () => {
     player = prompt(
       "Taper 1 pour jouer en premier ou 2 pour laisser la main à l'IA?"
     );
-    console.log(player, typeof player);
   }
-  if ((player = "1")) {
+  if (player == "1") {
     player = "J1";
-  } else {
+  } else if (player == "2") {
     player = "J2";
   }
 
